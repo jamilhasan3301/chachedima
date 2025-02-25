@@ -2,151 +2,61 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const Lab06AdvanceUI());
 }
 
-class MyApp extends StatelessWidget {
+class Lab06AdvanceUI extends StatelessWidget {
+  const Lab06AdvanceUI({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProductPage(),
-    );
-  }
-}
-
-class ProductPage extends StatefulWidget {
-  @override
-  _ProductPageState createState() => _ProductPageState();
-}
-
-class _ProductPageState extends State<ProductPage> {
-  int selectedSize = 37;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Icon(Icons.arrow_back, color: Colors.black),
-        actions: [
-          Icon(Icons.search, color: Colors.black),
-          SizedBox(width: 16),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CachedNetworkImage(
-              imageUrl: "http://via.placeholder.com/350x150",
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-            Center(
-              child: Image.network(
-                'https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg?cs=srgb&dl=pexels-pixabay-277319.jpg&fm=jpg',
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Apple Watch Series 6',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            Row(
-              children: List.generate(
-                5,
-                (index) => Icon(Icons.star, color: Colors.orange, size: 20),
-              ),
-            ),
-            SizedBox(height: 8),
-            Row(
+        title: "Advance Flutter UI",
+        home: Scaffold(
+          drawer: Drawer(
+            child: ListView(
               children: [
-                Text(
-                  '₦ 45,000',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                DrawerHeader(child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.settings,size: 25,color: Colors.black,),
+                    Icon(Icons.access_alarm_sharp,size: 25,color: Colors.blueAccent,)
+                  ],
+                )),
+                ListTile(
+                  leading: Icon(Icons.image),
+                  title: Text("Images"),
+                  onTap: () {},
                 ),
-                SizedBox(width: 10),
-                Text(
-                  '₦ 55,000',
-                  style: TextStyle(
-                    fontSize: 16,
-                    decoration: TextDecoration.lineThrough,
-                    color: Colors.grey,
-                  ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("Settings"),
+                  onTap: () {},
+                )
+              ],
+            ),
+          ),
+          appBar: AppBar(
+            title: Text("ADvance UI"),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                CachedNetworkImage(
+                  imageUrl:
+                      "https://images.unsplash.com/photo-1740219148636-824ab17bdd57?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-                Spacer(),
-                Text(
-                  'Available in Stock',
-                  style: TextStyle(color: Colors.green, fontSize: 14),
+                CachedNetworkImage(
+                  imageUrl:
+                      "https://plus.unsplash.com/premium_photo-1717529138029-5b049119cfb1?q=80&w=1994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Text(
-              'About',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'The upgraded S6 SIP runs up to 20 percent faster, allowing apps to also launch 20 percent faster, while maintaining the same all-day 18-hour battery life.',
-              style: TextStyle(color: Colors.grey[700]),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Select Size',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [36, 37, 38, 39, 40, 41]
-                  .map((size) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedSize = size;
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: selectedSize == size
-                                ? Colors.orange
-                                : Colors.grey[200],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            '$size',
-                            style: TextStyle(
-                              color: selectedSize == size
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                        ),
-                      ))
-                  .toList(),
-            ),
-            Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: Text(
-                  'Add to cart',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
