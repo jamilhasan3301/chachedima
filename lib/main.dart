@@ -13,6 +13,13 @@ class Lab06AdvanceUI extends StatelessWidget {
     return MaterialApp(
         title: "Advance Flutter UI",
         home: Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            items:[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),label: "home"),
+               BottomNavigationBarItem(
+                icon: Icon(Icons.navigation),label: "navigation"),  
+            ] ),
           drawer: Drawer(
             child: ListView(
               children: [
